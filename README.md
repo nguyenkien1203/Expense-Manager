@@ -152,6 +152,31 @@ pnpm start
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## 🌐 Deployment
+
+### Deploy to Vercel
+
+1. **Push your code** to GitHub, GitLab, or Bitbucket
+2. **Import your project** to [Vercel](https://vercel.com/)
+3. **Add environment variables** in Vercel dashboard:
+   - Go to your project settings
+   - Navigate to "Environment Variables"
+   - Add the following variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+```
+
+4. **Deploy** - Vercel will automatically build and deploy your application
+
+### Deploy to Other Platforms
+
+For other platforms (Netlify, Railway, etc.), make sure to:
+- Set the build command: `pnpm build`
+- Set the output directory: `.next`
+- Configure the same environment variables
+
 ## 📁 Project Structure
 
 ```
@@ -240,6 +265,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Ensure `.env.local` is in the project root
 - Restart the development server after adding variables
 - Variables must start with `NEXT_PUBLIC_` for client-side access
+
+**Vercel Deployment Issues**
+- Double-check environment variables are set in Vercel dashboard
+- Ensure variables start with `NEXT_PUBLIC_` for client-side access
+- Check build logs for specific error messages
+- If prerendering errors occur, the app will now show a configuration screen
 
 ## 📝 License
 

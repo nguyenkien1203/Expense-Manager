@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { supabase } from "@/lib/supabase"
+import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import { Expense, NewExpense } from "@/lib/types"
 
 export function useExpenses() {
@@ -11,6 +11,13 @@ export function useExpenses() {
   const fetchExpenses = async () => {
     try {
       setLoading(true)
+      
+      // Check if Supabase is configured
+      if (!isSupabaseConfigured() || !supabase) {
+        setError('Database connection not configured. Please check your environment variables.')
+        return
+      }
+
       const { data, error } = await supabase
         .from('expenses')
         .select('*')
@@ -36,6 +43,12 @@ export function useExpenses() {
   const addExpense = async (newExpense: NewExpense) => {
     if (newExpense.amount && newExpense.description && newExpense.category) {
       try {
+        // Check if Supabase is configured
+        if (!isSupabaseConfigured() || !supabase) {
+          setError('Database connection not configured. Please check your environment variables.')
+          return false
+        }
+
         const { data, error } = await supabase
           .from('expenses')
           .insert([
