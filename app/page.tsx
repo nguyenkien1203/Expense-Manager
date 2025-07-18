@@ -6,6 +6,7 @@ import { StatsCards } from "@/components/expense/StatsCards"
 import { ExpenseList } from "@/components/expense/ExpenseList"
 import { AddExpenseForm } from "@/components/expense/AddExpenseForm"
 import { Analytics } from "@/components/expense/Analytics"
+import { DailySpending } from "@/components/expense/DailySpending"
 import { ErrorMessage } from "@/components/ui/ErrorMessage"
 import { LoadingState } from "@/components/ui/LoadingState"
 import { isSupabaseConfigured } from "@/lib/supabase"
@@ -73,9 +74,10 @@ export default function ExpenseManager() {
 
             {/* Main Content Tabs */}
             <Tabs defaultValue="expenses" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="expenses">Expenses</TabsTrigger>
                 <TabsTrigger value="add">Add Expense</TabsTrigger>
+                <TabsTrigger value="daily">Daily View</TabsTrigger>
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
               </TabsList>
 
@@ -85,6 +87,10 @@ export default function ExpenseManager() {
 
               <TabsContent value="add">
                 <AddExpenseForm onAddExpense={addExpense} />
+              </TabsContent>
+
+              <TabsContent value="daily">
+                <DailySpending expenses={expenses} />
               </TabsContent>
 
               <TabsContent value="analytics">
